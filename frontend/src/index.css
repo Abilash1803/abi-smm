@@ -3,8 +3,28 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-bg: #f8fafc;
+    --color-bg-secondary: #ffffff;
+    --color-text: #0f172a;
+    --color-text-secondary: #64748b;
+    --color-border: #e2e8f0;
+    --color-card: #ffffff;
+    --color-card-hover: #f1f5f9;
+  }
+
+  .dark {
+    --color-bg: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-text: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-border: #334155;
+    --color-card: #1e293b;
+    --color-card-hover: #334155;
+  }
+
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-[var(--color-bg)] text-[var(--color-text)] antialiased transition-colors duration-300;
   }
 }
 
@@ -15,6 +35,14 @@
   
   .gradient-accent {
     @apply bg-gradient-to-r from-accent-600 to-accent-500;
+  }
+
+  .glass {
+    @apply backdrop-blur-lg bg-white/70 dark:bg-black/50;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border border-white/20 dark:border-gray-700/50;
   }
 }
 
