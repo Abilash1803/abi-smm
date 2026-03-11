@@ -1,12 +1,13 @@
-import Hero from '../components/home/Hero'
-import HowItWorks from '../components/home/HowItWorks'
-import Services from '../components/home/Services'
-import Features from '../components/home/Features'
-import Stats from '../components/home/Stats'
-import FreeTrial from '../components/home/FreeTrial'
-import Testimonials from '../components/home/Testimonials'
+import Hero from '../components/Hero';
+import HowItWorks from '../components/HowItWorks';
+import Services from '../components/Services';
+import Features from '../components/Features';
+import Stats from '../components/Stats';
+import FreeTrial from '../components/Trial';
+import Testimonials from '../components/Testimonials';
 
-const Home = () => {
+
+export default function Home() {
   return (
     <>
       <Hero />
@@ -17,7 +18,5 @@ const Home = () => {
       <FreeTrial />
       <Testimonials />
     </>
-  )
+  );
 }
-
-export default Home

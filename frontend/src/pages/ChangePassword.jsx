@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Button from '../components/common/Button'
-import { authAPI } from '../utils/auth'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import Button from '../components/Button';
+// TODO: Import authAPI from '../utils/api-template' when backend is ready
 
 const ChangePassword = () => {
   const navigate = useNavigate()

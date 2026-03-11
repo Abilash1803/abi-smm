@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Button from '../components/common/Button'
-import { authAPI } from '../utils/auth'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import Button from '../components/Button';
+import { getFromStorage } from '../utils';
+// TODO: Import authAPI from '../utils/api-template' when backend is ready
 
 const Profile = () => {
   const navigate = useNavigate()

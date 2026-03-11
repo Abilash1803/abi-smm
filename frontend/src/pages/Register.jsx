@@ -1,58 +1,65 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import SectionWrapper from '../components/common/SectionWrapper'
-import Button from '../components/common/Button'
-import { authAPI } from '../utils/auth'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import SectionWrapper from '../components/Section';
+import Button from '../components/Button';
+// TODO: Import authAPI from '../utils/api-template' when backend is ready
+
 
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
-  })
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-    })
-    setError('') // Clear error when user types
-  }
+    });
+    setError('');
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match')
-      return
+      setError('Passwords do not match');
+      return;
     }
 
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long')
-      return
+      setError('Password must be at least 6 characters long');
+      return;
     }
 
-    setIsLoading(true)
-    setError('')
+    setIsLoading(true);
+    setError('');
 
     try {
-      const { confirmPassword, ...registerData } = formData
-      const response = await authAPI.register(registerData)
+      // TODO: Uncomment when backend is ready
+      // const { confirmPassword, ...registerData } = formData;
+      // const response = await authAPI.register(registerData);
+      // if (response.success) {
+      //   navigate('/');
+      // }
       
-      if (response.success) {
-        // Redirect to home page
-        navigate('/')
-      }
+      // Temporary: Simulate successful registration
+      console.log('Registration attempt with:', formData);
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000);
     } catch (err) {
-      setError(err.message || 'Registration failed. Please try again.')
+      setError(err.message || 'Registration failed. Please try again.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-accent-50 via-white to-primary-50 relative overflow-hidden flex items-center justify-center py-12 px-4">
