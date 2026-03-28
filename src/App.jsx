@@ -2,7 +2,7 @@ import { BrowserRouter } from 'react-router-dom'
 import AppRoutes from './routes'
 import Navbar from './shared/components/layout/Navbar'
 import Footer from './shared/components/layout/Footer'
-import ClickSpark from './shared/components/ui/ClickSpark'
+import CustomCursor from './shared/components/ui/CustomCursor'
 
 /**
  * Main Application Component
@@ -17,26 +17,19 @@ import ClickSpark from './shared/components/ui/ClickSpark'
 export default function App() {
   return (
     <BrowserRouter>
-      <ClickSpark
-        sparkColor='#8B5CF6'
-        sparkSize={12}
-        sparkRadius={25}
-        sparkCount={8}
-        duration={600}
-      >
-        <div className="min-h-screen flex flex-col overflow-x-hidden">
-          {/* Global Navigation */}
-          <Navbar />
-          
-          {/* Main Content Area */}
-          <main className="flex-grow overflow-x-hidden">
-            <AppRoutes />
-          </main>
-          
-          {/* Global Footer */}
-          <Footer />
-        </div>
-      </ClickSpark>
+      <CustomCursor />
+      <div className="min-h-screen flex flex-col overflow-x-hidden cursor-none">
+        {/* Global Navigation */}
+        <Navbar />
+        
+        {/* Main Content Area */}
+        <main className="flex-grow overflow-x-hidden">
+          <AppRoutes />
+        </main>
+        
+        {/* Global Footer */}
+        <Footer />
+      </div>
     </BrowserRouter>
   )
 }
