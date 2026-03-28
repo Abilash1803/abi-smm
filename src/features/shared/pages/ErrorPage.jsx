@@ -1,0 +1,149 @@
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
+/**
+ * Error Page Component
+ * Displays error messages and provides navigation options
+ * 
+ * BACKEND INTEGRATION POINTS:
+ * - Error logging: Send error details to backend for monitoring
+ * - User feedback: Allow users to report issues
+ * - Analytics: Track error occurrences and user actions
+ */
+export default function ErrorPage() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [countdown, setCountdown] = useState(10)
+  
+  // Get error details from navigation state
+  const { 
+    title = 'Something went wrong',
+    message = 'An unexpected error occurred. Please try again.',
+    platform = null,
+    username = null,
+    errorCode = 'UNKNOWN_ERROR',
+    canRetry = true
+  } = location.state || {}
+
+  // Auto-redirect countdown
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          navigate('/')
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [navigate])
+
+  // BACKEND TODO: Log error for monitoring
+  useEffect(() => {
+    // POST /api/errors/log - Log error details for backend monitoring
+    console.error('Error logged:', {
+      errorCode,
+      platform,
+      username,
+      message,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      url: window.location.href
+    })
+  }, [errorCode, platform, username, message])
+
+  const handleRetry = () => {
+    if (platform) {
+      // Navigate back to the platform search page
+      navigate(`/${platform}`)
+    } else {
+      navigate('/')
+    }
+  }
+
+  const handleGoHome = () => {
+    navigate('/')
+  }
+
+  const handleReportIssue = () => {
+    // BACKEND TODO: Implement issue reporting
+    // POST /api/support/report-issue - Allow users to report problems
+    console.log('Issue reported:', { errorCode, platform, username, message })
+    
+    // For now, navigate to a contact or support page
+    // navigate('/contact')
+    alert('Thank you for reporting this issue. Our team will look into it.')
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center px-4">
+      <div className="max-w-md w-full">
+        {/* Error Icon */}
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{title}</h1>
+          <p className="text-gray-600 mb-6">{message}</p>
+          
+          {platform && username && (
+            <div className="bg-white rounded-lg p-4 mb-6 border border-gray-200">
+              <p className="text-sm text-gray-500 mb-1">Search Details:</p>
+              <p className="font-medium text-gray-900">
+                {platform.charAt(0).toUpperCase() + platform.slice(1)}: @{username}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="space-y-3">
+          {canRetry && (
+            <button
+              onClick={handleRetry}
+              className="w-full bg-gradient-to-r from-[#FF6B35] to-[#FFA500] text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-105"
+            >
+              {platform ? `Try ${platform.charAt(0).toUpperCase() + platform.slice(1)} Again` : 'Try Again'}
+            </button>
+          )}
+          
+          <button
+            onClick={handleGoHome}
+            className="w-full bg-white text-gray-700 py-3 px-6 rounded-lg font-semibold border border-gray-300 hover:bg-gray-50 transition-all"
+          >
+            Go to Home Page
+          </button>
+          
+          <button
+            onClick={handleReportIssue}
+            className="w-full bg-gray-100 text-gray-600 py-2 px-6 rounded-lg font-medium hover:bg-gray-200 transition-all text-sm"
+          >
+            Report This Issue
+          </button>
+        </div>
+
+        {/* Auto-redirect notice */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-500">
+            Automatically redirecting to home page in {countdown} seconds
+          </p>
+          <button
+            onClick={() => setCountdown(0)}
+            className="text-sm text-blue-600 hover:text-blue-700 underline mt-1"
+          >
+            Cancel auto-redirect
+          </button>
+        </div>
+
+        {/* Error Code */}
+        <div className="mt-6 text-center">
+          <p className="text-xs text-gray-400">Error Code: {errorCode}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
