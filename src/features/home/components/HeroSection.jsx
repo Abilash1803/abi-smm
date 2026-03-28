@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
+import MagneticButton from '../../../shared/components/ui/MagneticButton'
 
 // Import images
 import image1 from '../../../shared/assets/images/1.png'
@@ -197,13 +199,13 @@ export default function HeroSection() {
           {/* Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-20">
             {/* Primary CTA - Registration */}
-            <button 
-              ref={getStartedButtonRef}
+            <MagneticButton 
               onClick={handleGetStarted}
-              className="w-auto px-8 py-3 bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] text-white rounded-full font-semibold hover:shadow-lg hover:shadow-[#8B5CF6]/40 transition-all hover:scale-105"
+              className="w-auto px-8 py-3 bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] text-white rounded-full font-semibold hover:shadow-lg hover:shadow-[#8B5CF6]/40 transition-all"
+              strength={25}
             >
-              Get Started Now
-            </button>
+              <span ref={getStartedButtonRef}>Get Started Now</span>
+            </MagneticButton>
           </div>
         </div>
 
@@ -254,12 +256,16 @@ export default function HeroSection() {
               style={{ zIndex: hoveredCard === 0 ? 50 : 5 }}
             >
               <div 
-                className="bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80 overflow-hidden hover:scale-110 transition-transform duration-300"
+                className="group bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80 overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer relative"
                 onMouseEnter={() => setHoveredCard(0)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
-                  <img src={profileImages[0]} alt="User Profile" className="w-full h-full object-cover" />
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+                <div className="relative z-10">
+                  <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
+                    <img src={profileImages[0]} alt="User Profile" className="w-full h-full object-cover" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -270,12 +276,15 @@ export default function HeroSection() {
               style={{ zIndex: hoveredCard === 1 ? 50 : 10 }}
             >
               <div 
-                className="bg-gradient-to-br from-pink-400 to-orange-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-52 h-68 sm:w-60 sm:h-76 lg:w-72 lg:h-88 overflow-hidden hover:scale-110 transition-transform duration-300"
+                className="group bg-gradient-to-br from-pink-400 to-orange-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-52 h-68 sm:w-60 sm:h-76 lg:w-72 lg:h-88 overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer relative"
                 onMouseEnter={() => setHoveredCard(1)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
-                  <img src={profileImages[1]} alt="User Profile" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-orange-500 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+                <div className="relative z-10">
+                  <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
+                    <img src={profileImages[1]} alt="User Profile" className="w-full h-full object-cover" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -286,10 +295,11 @@ export default function HeroSection() {
               style={{ zIndex: hoveredCard === 4 ? 50 : 30 }}
             >
               <div 
-                className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl sm:rounded-3xl shadow-2xl border-4 border-white/70 p-3 sm:p-4 lg:p-5 w-56 h-72 sm:w-68 sm:h-84 lg:w-80 lg:h-96 overflow-hidden relative hover:scale-110 transition-transform duration-300"
+                className="group bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl sm:rounded-3xl shadow-2xl border-4 border-white/70 p-3 sm:p-4 lg:p-5 w-56 h-72 sm:w-68 sm:h-84 lg:w-80 lg:h-96 overflow-hidden relative hover:scale-110 transition-transform duration-300 cursor-pointer"
                 onMouseEnter={() => setHoveredCard(4)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl sm:rounded-3xl"></div>
                 <div className="relative z-10 h-full flex flex-col">
                   <div className="w-full flex-1 bg-white rounded-xl sm:rounded-2xl overflow-hidden mb-2 sm:mb-3 lg:mb-4">
@@ -319,12 +329,15 @@ export default function HeroSection() {
               style={{ zIndex: hoveredCard === 3 ? 50 : 10 }}
             >
               <div 
-                className="bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-52 h-68 sm:w-60 sm:h-76 lg:w-72 lg:h-88 overflow-hidden hover:scale-110 transition-transform duration-300"
+                className="group bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-52 h-68 sm:w-60 sm:h-76 lg:w-72 lg:h-88 overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer relative"
                 onMouseEnter={() => setHoveredCard(3)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
-                  <img src={profileImages[3]} alt="User Profile" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-teal-500 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+                <div className="relative z-10">
+                  <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
+                    <img src={profileImages[3]} alt="User Profile" className="w-full h-full object-cover" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -335,12 +348,15 @@ export default function HeroSection() {
               style={{ zIndex: hoveredCard === 2 ? 50 : 5 }}
             >
               <div 
-                className="bg-gradient-to-br from-yellow-400 to-red-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80 overflow-hidden hover:scale-110 transition-transform duration-300"
+                className="group bg-gradient-to-br from-yellow-400 to-red-500 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 p-2 sm:p-3 lg:p-4 w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80 overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer relative"
                 onMouseEnter={() => setHoveredCard(2)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
-                  <img src={profileImages[2]} alt="User Profile" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-red-500 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+                <div className="relative z-10">
+                  <div className="w-full h-5/6 bg-white rounded-xl sm:rounded-2xl overflow-hidden">
+                    <img src={profileImages[2]} alt="User Profile" className="w-full h-full object-cover" />
+                  </div>
                 </div>
               </div>
             </div>

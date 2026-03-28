@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import MagneticButton from '../../../shared/components/ui/MagneticButton'
 
 export default function CTASection() {
   return (
@@ -56,13 +57,12 @@ export default function CTASection() {
             Whether you want to buy TikTok likes, buy Instagram followers, buy YouTube views, or buy Facebook page likes, the right engagement can help your profile gain momentum and recognition.
           </motion.p>
           
-          <motion.button 
+          <MagneticButton 
             className="px-12 py-5 bg-gradient-to-r from-[#FF6B35] to-[#FFA500] text-white rounded-full font-bold text-xl hover:shadow-2xl hover:shadow-[#FF6B35]/50 transition-all duration-300"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            strength={30}
           >
             Step Into the Spotlight Soon
-          </motion.button>
+          </MagneticButton>
           
         </div>
 

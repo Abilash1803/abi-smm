@@ -4,6 +4,7 @@ import instagramIcon from '../../../shared/assets/icons/insta.png'
 import youtubeIcon from '../../../shared/assets/icons/yt.png'
 import facebookIcon from '../../../shared/assets/icons/fb.png'
 import tiktokIcon from '../../../shared/assets/icons/tiktok.png'
+import MagneticButton from '../../../shared/components/ui/MagneticButton'
 
 const cardVariants = {
   initial: { opacity: 0, y: 50 },
@@ -86,14 +87,13 @@ export default function ServicesSection() {
               <p className="text-sm sm:text-lg text-gray-800 max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-8">
                 Increase social media engagement, visibility and credibility across multiple platforms. Enhance your social presence and get the attention your content deserves.
               </p>
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <MagneticButton 
                 onClick={handleExploreServices} 
                 className="px-6 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-[#FF6B35] to-[#FFA500] text-white rounded-full font-semibold text-sm sm:text-lg hover:shadow-lg hover:shadow-[#FF6B35]/40 transition-all w-full sm:w-auto"
+                strength={20}
               >
                 Explore Our Services
-              </motion.button>
+              </MagneticButton>
             </div>
           </div>
         </motion.div>

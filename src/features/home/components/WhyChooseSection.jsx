@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import MagneticButton from '../../../shared/components/ui/MagneticButton'
 
 export default function WhyChoose() {
   const navigate = useNavigate()
@@ -318,14 +319,13 @@ export default function WhyChoose() {
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <MagneticButton 
             onClick={() => navigate('/register')} 
             className="px-6 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FFA500] text-white rounded-full font-semibold text-base hover:shadow-lg hover:shadow-[#FF6B35]/40 transition-all"
+            strength={25}
           >
             Get Started Today
-          </motion.button>
+          </MagneticButton>
         </motion.div>
 
       </div>

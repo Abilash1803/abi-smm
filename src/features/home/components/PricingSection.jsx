@@ -4,6 +4,7 @@ import instagramIcon from '../../../shared/assets/icons/insta.png'
 import youtubeIcon from '../../../shared/assets/icons/yt.png'
 import facebookIcon from '../../../shared/assets/icons/fb.png'
 import tiktokIcon from '../../../shared/assets/icons/tiktok.png'
+import MagneticButton from '../../../shared/components/ui/MagneticButton'
 
 const cardVariants = {
   initial: { opacity: 0, y: 30 },
@@ -124,17 +125,17 @@ export default function PricingSection() {
                 <h3 className="text-base md:text-lg font-bold text-black text-center mb-1">{item.platform}</h3>
                 <p className="text-xs md:text-sm text-gray-600 text-center mb-3 md:mb-4">{item.description}</p>
                 
-                <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+<MagneticButton 
+                  onClick={() => setSelectedPlatform(item.key)}
                   className={`w-full px-3 md:px-4 py-2.5 md:py-3 bg-gradient-to-r ${item.color} text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 text-sm md:text-base flex items-center justify-center gap-2`}
+                  strength={15}
                 >
                   <span>View Pricing</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
-                </motion.button>
+                </MagneticButton>
               </div>
             </motion.div>
           ))}
@@ -256,17 +257,13 @@ export default function PricingSection() {
                 </motion.div>
 
                 {/* CTA Button */}
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <MagneticButton
                   onClick={closeModal}
                   className={`w-full mt-4 py-3 sm:py-4 bg-gradient-to-r ${platformPricing[selectedPlatform].color} text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg hover:shadow-xl transition-all`}
+                  strength={20}
                 >
                   Get Started Now 🚀
-                </motion.button>
+                </MagneticButton>
               </div>
             </motion.div>
           </motion.div>
